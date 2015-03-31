@@ -1,4 +1,5 @@
-http://www.uol.com.br,Cell B1
-http://www.pg.com,Cell B2
-http://www.itau.com.br,Cell B3
-http://www.globo.com,Cell B6
+http://www.uol.com.br,Cell B1,Cell C1,Cell D1,Cell E1,Cell F1,Cell G1
+http://www.pg.com,Cell B2,,,,,
+http://www.itau.com.br,Cell B3,,,,,
+http://www.globo.com,Cell B6,,,,,
+http://www.naotemesse.com/,,,,,,
