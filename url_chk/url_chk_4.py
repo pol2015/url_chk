@@ -2,8 +2,8 @@ import urllib2
 from BeautifulSoup import BeautifulSoup
 import csv
 
-out_file = open("C:\Users\-6\py_data\url_chk\output_url.csv", "wb")
-in_file = open("C:\Users\-6\py_data\url_chk\input_url.csv","rb")
+out_file = open("C:\Users\-6\py_data\url_chk\output_url2.csv", "wb")
+in_file = open("C:\Users\-6\py_data\url_chk\input_url2.csv","rb")
 
 data=csv.reader(in_file)
 out_data=csv.writer(out_file)

@@ -34,15 +34,35 @@ for index,item in enumerate(data):
         try:                   
             print item[0]
             item[1] = checkUrl(item[0])
+            print item[1]
             soup = BeautifulSoup(urllib2.urlopen(item[0]))
             item[2] = soup.title.string
+            print item[2]
         except socket.gaierror:
             pass
             item[1] = 'False'
         except urllib2.HTTPError:
             pass
             item[2] = 'HTTPError'
-        
+        except AttributeError:
+            pass
+            item[2] = 'Attribute Error'
+        except UnicodeEncodeError:
+            pass
+            item[2] = 'Unicode Error'
+        except socket.error:
+            pass
+            item[2] = 'socket.error '  
+
+        except urllib2.URLError:
+            pass
+            item[2] = 'urllib2.URLError   '  
+             
+        except httplib.BadStatusLine:
+            pass
+            item[2] = 'httplib.BadStatusLine  '  
+
+     
    
  
 for item in data:
