@@ -31,7 +31,7 @@ def main(url):
     wie.Visible = 1
     wie.Navigate(url)
     ##wie.open(url)
-    time.sleep(4)
+    time.sleep(3)
     ie = get_ie(SHELL)
     if ie:
         #print ie.LocationURL
