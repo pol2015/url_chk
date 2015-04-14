@@ -13,8 +13,8 @@ import requests
 
 
 
-out_file = open("C:\Users\-6\py_data\url_chk\output_test.csv", "ab")
-in_file = open("C:\Users\-6\py_data\url_chk\input_test.csv","rb")
+out_file = open("C:\Users\-6\py_data\url_chk\output_url6.csv", "ab")
+in_file = open("C:\Users\-6\py_data\url_chk\input_url6.csv","rb")
 
 
 in_data=csv.reader(in_file)
@@ -139,10 +139,10 @@ for item in getdata(in_data):
             item[2] = 'HTTPError'
             printingresulterror()
             
-        except AttributeError:
-            pass
-            item[2] = 'Attribute Error'
-            printingresulterror()
+        #except AttributeError:
+        #    pass
+        #    item[2] = 'Attribute Error'
+        #    printingresulterror()
 
 
         except UnicodeEncodeError:
