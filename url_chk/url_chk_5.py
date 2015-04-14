@@ -6,9 +6,10 @@ import httplib
 import socket
 import requests
 #import urlparse
+import ie_title_check
 
 
-
+ie_title_check.main('www.cnn.com')
 
 
 
@@ -86,9 +87,8 @@ for item in getdata(in_data):
     if __name__ == '__main__':
         try:                   
             print item[0]
-      
-              
-            
+            print ie_title_check.main(item[0])
+            item[4] = ie_title_check.main(item[0])
             item[1] = checkUrl(item[0])
             
             

@@ -17,6 +17,7 @@ import win32com.client
 
 
 SHELL = Dispatch("Shell.Application")
+wie = win32com.client.Dispatch('InternetExplorer.Application')
 
 def get_ie(shell):
     for win in shell.Windows():
@@ -26,22 +27,25 @@ def get_ie(shell):
             return None
 
 def main(url):
-    wie = win32com.client.Dispatch('InternetExplorer.Application')
+    #wie = win32com.client.Dispatch('InternetExplorer.Application')
     wie.Visible = 1
     wie.Navigate(url)
-    time.sleep(5)
+    ##wie.open(url)
+    time.sleep(4)
     ie = get_ie(SHELL)
     if ie:
-        print ie.LocationURL
-        print ie.LocationName 
+        #print ie.LocationURL
+        #print ie.LocationName 
         #print ie.ReadyState 
         #print ie 
         #print ie.Document.title 
         #print ie.Document.location 
         #print ie.Document.forms 
+        ie_resp = ie.LocationName
         #wie.Quit() 
 
         #print ie
+        return ie_resp
     else:
         print "no ie window"
 
