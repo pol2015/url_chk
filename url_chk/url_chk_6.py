@@ -7,6 +7,31 @@ import socket
 import requests
 #import urlparse
 import ie_title_check
+import codecs
+
+class UnicodeCsvReader(object):
+    def __init__(self, f, encoding="utf-8", **kwargs):
+        self.csv_reader = csv.reader(f, **kwargs)
+        self.encoding = encoding
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        # read and split the csv row into fields
+        row = self.csv_reader.next() 
+        # now decode
+        return [unicode(cell, self.encoding) for cell in row]
+
+    @property
+    def line_num(self):
+        return self.csv_reader.line_num
+
+class UnicodeDictReader(csv.DictReader):
+    def __init__(self, f, encoding="utf-8", fieldnames=None, **kwds):
+        csv.DictReader.__init__(self, f, fieldnames=fieldnames, **kwds)
+        self.reader = UnicodeCsvReader(f, encoding=encoding, **kwds)
+  
 
 from splinter.request_handler.status_code import HttpResponseError
 
@@ -39,16 +64,29 @@ Dur = 500 # Set Duration To 1000 ms == 1 second
 #print url2
 #browser.quit()
 
-
+#encoding='utf-8'
 
 
 #ie_title_check.main('www.cnn.com')
 #input_url3.csv
 
-out_file = open("C:\Users\-6\py_data\url_chk\output_url4.csv", "ab")
-in_file = open("C:\Users\-6\py_data\url_chk\input_url4.csv","rb")
+#file = codecs.open('data.txt','w','utf-8')
 
-in_data=csv.reader(in_file)
+#with open('xxx.csv','rb') as fin, open('lll.csv','wb') as fout:
+#    reader = UnicodeReader(fin)
+#    writer = UnicodeWriter(fout,quoting=csv.QUOTE_ALL)
+#    for line in reader:
+#        writer.writerow(line)
+
+
+out_file = open("C:\Users\-6\py_data\url_chk\output_url7.csv", "ab")
+in_file = open("C:\Users\-6\py_data\url_chk\input_url7.csv","rb")
+
+in_data=csv.reader(in_file) #correct
+
+#reader = UnicodeReader(fin)
+
+#in_data=UnicodeCsvReader(in_file) #correct
 
 soup=[1,2,3,4,5,6]
 
@@ -74,6 +112,11 @@ def printingresulterror():
      out_data.writerow(item)
      out_file.close
 
+     #out_data = UnicodeCsvReader(out_file)
+     #out_data.writerow(item)
+     #out_file.close
+     
+
 
 for item in getdata(in_data):
 
@@ -91,7 +134,17 @@ for item in getdata(in_data):
             item[2] = browser.title
             print item[2]
             winsound.Beep(Freq,Dur/2)
-            out_data=csv.writer(out_file)
+
+
+    #writer = UnicodeWriter(fout,quoting=csv.QUOTE_ALL)
+            #for line in reader:
+            #writer.writerow(line)
+            
+
+            #writer = UnicodeWriter(fout,quoting=csv.QUOTE_ALL)
+            out_data = UnicodeCsvReader(out_file)
+            
+            #out_data=csv.writer(out_file)
             out_data.writerow(item)
             
             out_file.close
@@ -121,10 +174,10 @@ for item in getdata(in_data):
 ##            item[2] = 'HTTPError'
 ##            printingresulterror()
 ##            
-##        except AttributeError:
-##            pass
-##            item[2] = 'Attribute Error'
-##            printingresulterror()
+        except AttributeError:
+            pass
+            item[2] = 'Attribute Error'
+            printingresulterror()
 ##
 
         except UnicodeEncodeError:
@@ -145,10 +198,10 @@ for item in getdata(in_data):
 ##            item[2] = 'urllib2.URLError   '
 ##            printingresulterror()
 ##             
-##        except httplib.BadStatusLine:
-##            pass
-##            item[2] = 'httplib.BadStatusLine  '
-##            printingresulterror()
+        except httplib.BadStatusLine:
+            pass
+            item[2] = 'httplib.BadStatusLine  '
+            printingresulterror()
 ##
 ##
 ##        except httplib.HTTPException:
